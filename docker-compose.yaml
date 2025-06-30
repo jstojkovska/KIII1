@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/vezba1_db
+      SPRING_DATASOURCE_USERNAME: emt
+      SPRING_DATASOURCE_PASSWORD: emt
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:17.4
+    container_name: pgdb
+    restart: always
+    ports:
+      - "5438:5432"
+    environment:
+      POSTGRES_USER: emt
+      POSTGRES_PASSWORD: emt
+      POSTGRES_DB: vezba1_db
+    volumes:
+      - vezba1_pgdata:/var/lib/postgresql/data
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./backend/views.sql:/docker-entrypoint-initdb.d/views.sql
+
+volumes:
+  vezba1_pgdata:
