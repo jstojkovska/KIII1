@@ -20,7 +20,7 @@ const AccommodationCard = ({accommodation, onEdit, onDelete, onToggleRented}) =>
         <>
             <Card sx={{boxShadow: 3, borderRadius: 2, p: 1}}>
                 <CardContent>
-                    <Typography variant="h5">{accommodation.name}</Typography>
+                    <Typography variant="h6">{accommodation.name}</Typography>
                     <Typography variant="subtitle2">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aperiam assumenda blanditiis cum
                         ducimus enim modi natus odit quibusdam veritatis.
